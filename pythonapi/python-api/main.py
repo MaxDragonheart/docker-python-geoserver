@@ -1,10 +1,12 @@
 import json
+from pathlib import Path
 
 from api import get_wms_data
 
+main_path = Path(__file__)
 
 # Opening JSON file
-file = open('geoserver_json.json')
+file = open(main_path.parent.parent.joinpath('geoserver_json.json'))
 
 # returns JSON object as
 # a dictionary
