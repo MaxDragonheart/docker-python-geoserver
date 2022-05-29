@@ -12,6 +12,8 @@ FROM gis-os as project-dependencies
 WORKDIR /app/web
 # Environment variables
 ARG PROJECT_NAME=python-api
+ARG PYTHON_API_PORT=8301
+
 ENV ENV_NAME=${PROJECT_NAME} \
     # Pip
     PIP_NO_CACHE_DIR=off \
@@ -19,7 +21,8 @@ ENV ENV_NAME=${PROJECT_NAME} \
     PIP_DEFAULT_TIMEOUT=100 \
     # Poetry
     # https://python-poetry.org/docs/configuration/#using-environment-variables
-    POETRY_VERSION=1.1.11
+    POETRY_VERSION=1.1.11 \
+    PYTHON_API_PORT=${PYTHON_API_PORT}
 # Install Poetry
 RUN pip3 install "poetry==$POETRY_VERSION"
 # Copy project requirements
@@ -31,3 +34,5 @@ RUN poetry config virtualenvs.create false \
 # Copy project data
 COPY python-api python-api
 COPY geoserver_json.json geoserver_json.json
+
+#EXPOSE ${PYTHON_API_PORT}

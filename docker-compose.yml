@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  geoserver:
+    image: maxdragonheart/geoserver
+    environment:
+      GS_VERSION: ${GS_VERSION}
+      GS_DEMO_DATA: ${GS_DEMO_DATA}
+      GS_HTTP_PORT: ${GS_HTTP_PORT}
+      GS_INITIAL_MEMORY: ${GS_INITIAL_MEMORY}
+      GS_MAXIMUM_MEMORY: ${GS_MAXIMUM_MEMORY}
+    container_name: dev_geoserver
+    restart: always
+    ports:
+    - ${GS_HTTP_PORT}:8080
+
+  python-api:
+    image: maxdragonheart/${PROJECT_NAME}
+    build:
+      context: ./pythonapi
+      dockerfile: Dockerfile
+    environment:
+      PROJECT_NAME: ${PROJECT_NAME}
+    container_name: dev_pythonapi
+    restart: always
+    ports:
+    - ${PYTHON_API_PORT}:${PYTHON_API_PORT}
+    depends_on:
+      - geoserver
