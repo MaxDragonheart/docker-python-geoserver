@@ -8,7 +8,7 @@ def get_wms_data(
         srs: str = 'EPSG:4326',
         width: int = 300,
         high: int = 300,
-):
+) -> dict:
     """Get thumbnail from WMS layer, it's saved into selected folder and also return
     the saved path.
     Args:
@@ -19,7 +19,7 @@ def get_wms_data(
         width: Integer.
         high: Integer.
     Returns:
-        pathlib.PosixPath
+        dict
     """
     # Read WMS
     wms = WebMapService(url=wms_url, version=service_version)
@@ -32,7 +32,6 @@ def get_wms_data(
     # Create thumbnail
     img = wms.getmap(
         layers=[layer_name],
-        #styles=[styles],
         srs=srs,
         bbox=bbox,
         size=(width, high),
@@ -45,4 +44,4 @@ def get_wms_data(
         "wms-bbox": bbox,
         "wms-img": img
     }
-    print(data)
+    return data

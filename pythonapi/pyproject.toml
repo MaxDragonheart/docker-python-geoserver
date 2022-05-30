@@ -8,6 +8,7 @@ authors = ["MaxDragonheart <massimilianomoraca@gmail.com>"]
 python = "^3.8"
 urllib3 = "^1.26.9"
 OWSLib = "^0.25.0"
+Flask = "^2.1.2"
 
 [tool.poetry.dev-dependencies]
 

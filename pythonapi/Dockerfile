@@ -32,7 +32,9 @@ RUN poetry config virtualenvs.create false \
   && poetry install $(test "$ENV_NAME" == production && echo "--no-dev") --no-interaction --no-ansi
 
 # Copy project data
-COPY python-api python-api
+COPY app app
 COPY geoserver_json.json geoserver_json.json
 
-#EXPOSE ${PYTHON_API_PORT}
+ENTRYPOINT [ "python3" ]
+
+CMD [ "./app/app.py" ]
