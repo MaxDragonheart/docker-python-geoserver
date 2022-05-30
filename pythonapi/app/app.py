@@ -29,7 +29,7 @@ def start_api():
         layer_name=data['layer_name'],
     )
 
-    return f'<h1>{output["wms-bbox"]}</h1>'
+    return f'<h1>{output["wms-title"]}</h1>'
 
 
 if __name__ == '__main__':
