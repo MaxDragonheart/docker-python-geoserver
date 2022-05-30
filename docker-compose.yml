@@ -1,20 +1,22 @@
 version: '3.7'
 
 services:
-#  geoserver:
-#    image: maxdragonheart/geoserver
-#    environment:
-#      GS_VERSION: ${GS_VERSION}
-#      GS_DEMO_DATA: ${GS_DEMO_DATA}
-#      GS_HTTP_PORT: ${GS_HTTP_PORT}
-#      GS_INITIAL_MEMORY: ${GS_INITIAL_MEMORY}
-#      GS_MAXIMUM_MEMORY: ${GS_MAXIMUM_MEMORY}
-#    container_name: dev_geoserver
-#    restart: always
-#    ports:
-#    - ${GS_HTTP_PORT}:8080
-#    volumes:
-#    - geoserver:/opt/tomcat/webapps/geoserver
+  geoserver:
+    image: maxdragonheart/geoserver
+    environment:
+      GS_VERSION: ${GS_VERSION}
+      GS_DEMO_DATA: ${GS_DEMO_DATA}
+      GS_HTTP_PORT: ${GS_HTTP_PORT}
+      GS_INITIAL_MEMORY: ${GS_INITIAL_MEMORY}
+      GS_MAXIMUM_MEMORY: ${GS_MAXIMUM_MEMORY}
+    container_name: dev_geoserver
+    restart: always
+    ports:
+    - ${GS_HTTP_PORT}:8080
+    volumes:
+    - geoserver:/opt/tomcat/webapps/geoserver
+    networks:
+      - test
 
   python-api:
     image: maxdragonheart/${PROJECT_NAME}
@@ -27,8 +29,14 @@ services:
     restart: always
     ports:
     - ${PYTHON_API_PORT}:5000
-#    depends_on:
-#      - geoserver
+    depends_on:
+      - geoserver
+    networks:
+      - test
 
-#volumes:
-#  geoserver:
+volumes:
+  geoserver:
+
+networks:
+  test:
+    driver: bridge
