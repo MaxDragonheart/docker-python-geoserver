@@ -1,7 +1,10 @@
+import logging
 from pathlib import Path
 
 from owslib.wms import WebMapService
 from fsspec import get_fs_token_paths
+
+from conf import domain, workspace, service_version, layer_name
 
 MAIN_PATH = Path().cwd()
 
@@ -27,13 +30,16 @@ def get_wms_data(
         dict
     """
     # Read WMS
+    logging.info("Read WMS")
     wms = WebMapService(url=wms_url, version=service_version)
 
     # Get bounding box from selected layer
+    logging.info("Get bounding box from selected layer")
     layer = wms[layer_name]
     bbox = layer.boundingBoxWGS84
 
     # Create thumbnail
+    logging.info("Create thumbnail")
     img = wms.getmap(
         layers=[layer_name],
         srs=srs,
@@ -44,11 +50,13 @@ def get_wms_data(
     )
 
     # Make destination folder
+    logging.info("Make thumbnail's destination folder")
     destination_folder = MAIN_PATH.parent.joinpath('media')
     fs, fs_token, paths = get_fs_token_paths(destination_folder)
     fs.mkdirs(path=destination_folder, exist_ok=True)
 
     # Put thumbnail into destinantion folder
+    logging.info("Put thumbnail into destinantion folder")
     img_path = Path(f'{destination_folder}/{layer.title}.jpg')
     out = open(img_path, 'wb')
     out.write(img.read())
@@ -59,17 +67,15 @@ def get_wms_data(
         "wms-bbox": bbox,
         "wms-img": img_path
     }
+    logging.info(f"Output: {data}")
     return data
 
+
 # TEST
-# if __name__ == '__main__':
-#     domain = "https://geoserver.massimilianomoraca.me"
-#     workspace = "MassimilianoMoraca"
-#     service_version = "1.3.0"
-#     layer_name = "edificicasalnuovo"
-#
-#     get_wms_data(
-#         wms_url=f"{domain}/geoserver/{workspace}/wms",
-#         service_version=service_version,
-#         layer_name=layer_name,
-#     )
+if __name__ == '__main__':
+
+    get_wms_data(
+        wms_url=f"{domain}/geoserver/{workspace}/wms",
+        service_version=service_version,
+        layer_name=layer_name,
+    )

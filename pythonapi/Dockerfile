@@ -5,7 +5,7 @@ ARG PROJECT_NAME=test_dev
 FROM maxdragonheart/ulgis:latest as gis-os
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt install python3.8-venv
+RUN apt-get install python3.8-venv
 
 # GIS-OS as Layer
 FROM gis-os as project-dependencies
@@ -43,8 +43,5 @@ RUN poetry install --no-dev --no-root --no-ansi
 
 # Copy project data
 COPY app app
-COPY geoserver_json.json geoserver_json.json
 
-#ENTRYPOINT [ "python3" ]
-
-#CMD [ "./app/app.py" ]
+CMD [ "poetry", "run", "python3", "./app/app.py" ]

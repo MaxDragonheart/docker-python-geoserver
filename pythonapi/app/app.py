@@ -1,9 +1,8 @@
-import json
-from pathlib import Path
+from conf import domain, workspace, service_version, layer_name
 
 from flask import Flask
 
-from api import get_wms_data, MAIN_PATH
+from api import get_wms_data
 
 app = Flask(__name__)
 
@@ -12,17 +11,10 @@ app = Flask(__name__)
 # def hello_world():
 #     return 'hello world'
 def start_api():
-    # Opening JSON file
-    file = open(MAIN_PATH.parent.joinpath('geoserver_json.json'))
-
-    # returns JSON object as
-    # a dictionary
-    data = json.load(file)
-
     output = get_wms_data(
-        wms_url=f"{data['url']}/geoserver/{data['workspace']}/wms",
-        service_version=data['service_version'],
-        layer_name=data['layer_name'],
+        wms_url=f"{domain}/geoserver/{workspace}/wms",
+        service_version=service_version,
+        layer_name=layer_name,
     )
 
     return f"<h1>Layer Title: {output['wms-title']}</h1><br>" \
