@@ -1,4 +1,9 @@
-# Docker 
+# PYTHON-DOCKER
+Ambiente di test per verificare l'interazione tra due immagini Docker usando Python.
+
+Nel docker compose è presente il richiamo dell'immagine Docker di [Geoserver](https://github.com/MaxDragonheart/docker-geoserver)
+
+-----
 
 Build: `docker build -t LAYER-NAME .`
 

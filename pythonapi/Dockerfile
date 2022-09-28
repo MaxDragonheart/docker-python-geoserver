@@ -20,7 +20,7 @@ ENV ENV_NAME=${PROJECT_NAME} \
     PIP_DEFAULT_TIMEOUT=100 \
     # Poetry
     # https://python-poetry.org/docs/configuration/#using-environment-variables
-    POETRY_VERSION=1.1.11
+    POETRY_VERSION=1.2.1
 
 # Install Poetry
 RUN pip3 install "poetry==$POETRY_VERSION"
