@@ -3,21 +3,17 @@ from pathlib import Path
 
 from flask import Flask
 
-from api import get_wms_data
+from api import get_wms_data, MAIN_PATH
 
 app = Flask(__name__)
-
-main_path = Path(__file__)
 
 
 @app.route('/')
 # def hello_world():
 #     return 'hello world'
-
-
 def start_api():
     # Opening JSON file
-    file = open(main_path.parent.parent.joinpath('geoserver_json.json'))
+    file = open(MAIN_PATH.parent.joinpath('geoserver_json.json'))
 
     # returns JSON object as
     # a dictionary

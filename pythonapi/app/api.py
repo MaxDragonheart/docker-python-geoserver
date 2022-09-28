@@ -3,6 +3,8 @@ from pathlib import Path
 from owslib.wms import WebMapService
 from fsspec import get_fs_token_paths
 
+MAIN_PATH = Path().cwd()
+
 
 def get_wms_data(
         wms_url: str,
@@ -42,7 +44,7 @@ def get_wms_data(
     )
 
     # Make destination folder
-    destination_folder = Path().cwd().parent.joinpath('media')
+    destination_folder = MAIN_PATH.parent.joinpath('media')
     fs, fs_token, paths = get_fs_token_paths(destination_folder)
     fs.mkdirs(path=destination_folder, exist_ok=True)
 

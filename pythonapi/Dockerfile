@@ -45,6 +45,6 @@ RUN poetry install --no-dev --no-root --no-ansi
 COPY app app
 COPY geoserver_json.json geoserver_json.json
 
-ENTRYPOINT [ "python3" ]
+#ENTRYPOINT [ "python3" ]
 
-CMD [ "./app/app.py" ]
+#CMD [ "./app/app.py" ]
