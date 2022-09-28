@@ -1,7 +1,6 @@
-from conf import domain, workspace, service_version, layer_name
-
 from flask import Flask
 
+from conf import DOMAIN, WORKSPACE, SERVICE_VERSION, LAYER_NAME
 from api import get_wms_data
 
 app = Flask(__name__)
@@ -12,9 +11,9 @@ app = Flask(__name__)
 #     return 'hello world'
 def start_api():
     output = get_wms_data(
-        wms_url=f"{domain}/geoserver/{workspace}/wms",
-        service_version=service_version,
-        layer_name=layer_name,
+        wms_url=f"{DOMAIN}/geoserver/{WORKSPACE}/wms",
+        service_version=SERVICE_VERSION,
+        layer_name=LAYER_NAME,
     )
 
     return f"<h1>Layer Title: {output['wms-title']}</h1><br>" \
