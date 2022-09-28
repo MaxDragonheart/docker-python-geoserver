@@ -1,6 +1,6 @@
 # DOCKER-PYTHON-GEOSERVER
-Test environment to verify the connection between two images.
 
+Test environment to verify the connection between two images.
 The Geoserver's Docker image used into docker compose is [this](https://github.com/MaxDragonheart/docker-geoserver).
 -----
 
