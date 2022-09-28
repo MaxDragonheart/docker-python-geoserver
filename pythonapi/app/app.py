@@ -29,7 +29,9 @@ def start_api():
         layer_name=data['layer_name'],
     )
 
-    return f'<h1>{output["wms-title"]}</h1>'
+    return f"<h1>Layer Title: {output['wms-title']}</h1><br>" \
+           f"<p>BBOX: {output['wms-bbox']}</p><br>" \
+           f"<p>THUMBNAIL PATH: {output['wms-img']}</p><br>"
 
 
 if __name__ == '__main__':

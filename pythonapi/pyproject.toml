@@ -10,6 +10,7 @@ packages = [{include = "test_python_dockergeoserver"}]
 python = "^3.8"
 Flask = "^2.2.2"
 OWSLib = "^0.27.2"
+fsspec = "^2022.8.2"
 
 
 [build-system]

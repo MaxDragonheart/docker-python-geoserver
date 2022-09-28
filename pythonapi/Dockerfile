@@ -5,6 +5,7 @@ ARG PROJECT_NAME=test_dev
 FROM maxdragonheart/ulgis:latest as gis-os
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
+RUN apt install python3.8-venv
 
 # GIS-OS as Layer
 FROM gis-os as project-dependencies
@@ -20,15 +21,25 @@ ENV ENV_NAME=${PROJECT_NAME} \
     PIP_DEFAULT_TIMEOUT=100 \
     # Poetry
     # https://python-poetry.org/docs/configuration/#using-environment-variables
-    POETRY_VERSION=1.2.1
+    # https://python-poetry.org/docs#ci-recommendations
+    POETRY_VERSION=1.2.1 \
+    POETRY_HOME=/opt/poetry \
+    POETRY_VENV=/opt/poetry-venv \
+    POETRY_CACHE_DIR=/opt/.cache
 
 # Install Poetry
-RUN pip3 install "poetry==$POETRY_VERSION"
+RUN python3 -m venv $POETRY_VENV \
+    && $POETRY_VENV/bin/pip install -U pip setuptools \
+    && $POETRY_VENV/bin/pip install poetry==${POETRY_VERSION}
+
+# Add Poetry to PATH
+ENV PATH="${PATH}:${POETRY_VENV}/bin"
+
 # Copy project requirements
 COPY ./pyproject.toml ./pyproject.toml
+
 # Project initialization
-RUN poetry config virtualenvs.create false \
-  && poetry install $(test "$ENV_NAME" == production && echo "--no-dev") --no-interaction --no-ansi
+RUN poetry install --no-dev --no-root --no-ansi
 
 # Copy project data
 COPY app app
