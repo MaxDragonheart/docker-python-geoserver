@@ -1,5 +1,9 @@
 # syntax=docker/dockerfile:1
 ARG PROJECT_NAME=test_dev
+ARG DOMAIN=https://geoserver.massimilianomoraca.me
+ARG WORKSPACE=MassimilianoMoraca
+ARG SERVICE_VERSION=1.3.0
+ARG LAYER_NAME=NDVI_Campania_20150807
 
 # Official Ubuntu Image as Layer
 FROM maxdragonheart/ulgis:latest as gis-os
@@ -15,6 +19,10 @@ WORKDIR /app/web
 ARG PROJECT_NAME=python-api
 
 ENV ENV_NAME=${PROJECT_NAME} \
+    ENV_DOMAIN=${DOMAIN} \
+    ENV_WORKSPACE=${WORKSPACE} \
+    ENV_SERVICE_VERSION=${SERVICE_VERSION} \
+    ENV_LAYER_NAME=${LAYER_NAME} \
     # Pip
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
@@ -39,7 +47,7 @@ ENV PATH="${PATH}:${POETRY_VENV}/bin"
 COPY ./pyproject.toml ./pyproject.toml
 
 # Project initialization
-RUN poetry install --no-dev --no-root --no-ansi
+RUN poetry install --only main --no-root --no-ansi
 
 # Copy project data
 COPY app app

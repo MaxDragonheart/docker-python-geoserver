@@ -28,6 +28,10 @@ services:
       dockerfile: Dockerfile
     environment:
       PROJECT_NAME: ${PROJECT_NAME}
+      DOMAIN: ${DOMAIN}
+      WORKSPACE: ${WORKSPACE}
+      SERVICE_VERSION: ${SERVICE_VERSION}
+      LAYER_NAME: ${LAYER_NAME}
     container_name: test_pythonapi
     restart: always
     ports:

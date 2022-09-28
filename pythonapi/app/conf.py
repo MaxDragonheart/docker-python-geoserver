@@ -1,4 +1,8 @@
+import os
 import logging
+from pathlib import Path
+
+from dotenv import load_dotenv
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -7,9 +11,16 @@ console_handler = logging.StreamHandler()
 console_handler.setFormatter(logging.Formatter(log_format))
 logger.addHandler(console_handler)
 
+MAIN_PATH = Path().cwd()
 
-domain = "https://geoserver.massimilianomoraca.me"
-workspace = "MassimilianoMoraca"
-service_version = "1.3.0"
-layer_name = "edificicasalnuovo"
-layer_type = "vector"
+env_file = load_dotenv()
+
+DOMAIN = os.getenv("DOMAIN")
+WORKSPACE = os.getenv("WORKSPACE")
+SERVICE_VERSION = os.getenv("SERVICE_VERSION")
+LAYER_NAME = os.getenv("LAYER_NAME")
+
+# domain = "https://geoserver.massimilianomoraca.me"
+# workspace = "MassimilianoMoraca"
+# service_version = "1.3.0"
+# layer_name = "edificicasalnuovo"
