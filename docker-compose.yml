@@ -35,7 +35,7 @@ services:
     container_name: test_pythonapi
     restart: always
     ports:
-    - "${PYTHON_API_PORT}:8301"
+    - ${PYTHON_API_PORT}:5000
     depends_on:
       - geoserver
     networks:
