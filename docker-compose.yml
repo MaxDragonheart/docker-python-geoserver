@@ -12,10 +12,10 @@ services:
         TOMCAT_MAJOR: ${TOMCAT_MAJOR}
         TOMCAT_MINOR: ${TOMCAT_MINOR}
         TOMCAT_PATCH: ${TOMCAT_PATCH}
-    container_name: test_geoserver
+    container_name: test-geoserver
     restart: always
     ports:
-    - ${GS_HTTP_PORT}:8080
+    - "${GS_HTTP_PORT}:8080"
     volumes:
     - geoserver:/opt/tomcat/webapps/geoserver
     networks:
@@ -32,7 +32,7 @@ services:
       WORKSPACE: ${WORKSPACE}
       SERVICE_VERSION: ${SERVICE_VERSION}
       LAYER_NAME: ${LAYER_NAME}
-    container_name: test_pythonapi
+    container_name: test-pythonapi
     restart: always
     ports:
     - ${PYTHON_API_PORT}:5000
