@@ -8,6 +8,8 @@ from api import get_wms_data
 app = Flask(__name__, template_folder=Path('./templates'))
 
 WMS_URL = f"{DOMAIN}/geoserver/{WORKSPACE}/wms"
+CONTAINER_URL = "http://127.0.0.1:8011/"
+CONTAINER_WMS_URL = f"{CONTAINER_URL}/geoserver/{WORKSPACE}/wms"
 
 
 @app.route('/')
@@ -17,7 +19,10 @@ def start_api():
         service_version=SERVICE_VERSION,
         layer_name=LAYER_NAME,
     )
-    output['wms-url'] = WMS_URL
+    if DOMAIN == "http://test-geoserver:8080":
+        output['wms-url'] = CONTAINER_WMS_URL
+    else:
+        output['wms-url'] = WMS_URL
     output['wms-layer'] = LAYER_NAME
 
     return render_template('index.html', title=LAYER_NAME, context=output)
