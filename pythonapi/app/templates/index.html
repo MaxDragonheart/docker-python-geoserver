@@ -5,8 +5,9 @@
     <title>{{ title }}</title>
 </head>
 <body>
-    <h1>Layer Title: {#{ output['wms-title'] }#}</h1>
-    <p>BBOX: {#{ output['wms-bbox'] }#}</p>
-    <p>THUMBNAIL PATH: {#{ output['wms-img'] }#}</p>
+    <h1>Layer Title: {{ context['wms-title'] }}</h1>
+    <p>BBOX: {{ context['wms-bbox'] }}</p>
+    <p>THUMBNAIL PATH: {{ context['wms-img'] }}</p>
+
 </body>
 </html>
