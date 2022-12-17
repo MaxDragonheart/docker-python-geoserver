@@ -19,6 +19,7 @@ DOMAIN = os.getenv("DOMAIN")
 WORKSPACE = os.getenv("WORKSPACE")
 SERVICE_VERSION = os.getenv("SERVICE_VERSION")
 LAYER_NAME = os.getenv("LAYER_NAME")
+PYTHON_API_PORT = os.getenv("PYTHON_API_PORT")
 
 # domain = "https://geoserver.massimilianomoraca.me"
 # workspace = "MassimilianoMoraca"

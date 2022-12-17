@@ -4,7 +4,7 @@ from pathlib import Path
 from owslib.wms import WebMapService
 from fsspec import get_fs_token_paths
 
-from conf import DOMAIN, WORKSPACE, SERVICE_VERSION, LAYER_NAME, MAIN_PATH
+from conf import MAIN_PATH
 
 
 def get_wms_data(
@@ -63,17 +63,9 @@ def get_wms_data(
     data = {
         "wms-title": layer.title,
         "wms-bbox": bbox,
-        "wms-img": img_path
+        "wms-img": str(img_path)
     }
-    logging.info(f"Output: {data}")
+
+    logging.info(f"Response: {data}")
+
     return data
-
-
-# # TEST
-# if __name__ == '__main__':
-#
-#     get_wms_data(
-#         wms_url=f"{DOMAIN}/geoserver/{WORKSPACE}/wms",
-#         service_version=SERVICE_VERSION,
-#         layer_name=LAYER_NAME,
-#     )

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+    <!-- OpenLayers 6 -->
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.1.0/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.1.0/ol.css">
+    <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+          width: 100vw;
+          height: 50vh;
+        }
+        #map {
+          width: 100vw;
+          height: 100vh;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Layer Title: {{ context['wms-title'] }}</h1>
+    <p>BBOX: {{ context['wms-bbox'] }}</p>
+    <p>THUMBNAIL PATH: {{ context['wms-img'] }}</p>
+
+    <div id='map'></div>
+
+<script>
+var map = new ol.Map({target: 'map'});
+
+var view = new ol.View({
+    center: ol.proj.fromLonLat([14.483733304611981, 40.69930245824812]),
+    zoom: 9,
+});
+map.setView(view);
+
+var osm = new ol.layer.Tile({
+    source: new ol.source.OSM(),
+    zIndex: 0
+});
+map.addLayer(osm);
+
+var mainUrl = "{{ context['wms-url'] }}"
+
+var layer = new ol.layer.Tile({
+    source: new ol.source.TileWMS({
+        url: mainUrl,
+        params: {
+            'LAYERS': "{{ context['wms-layer'] }}",
+        }
+    }),
+});
+map.addLayer(layer);
+
+</script>
+</body>
+</html>
