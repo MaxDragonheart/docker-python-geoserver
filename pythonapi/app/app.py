@@ -1,9 +1,11 @@
+from pathlib import Path
+
 from flask import Flask, render_template
 
-from conf import DOMAIN, WORKSPACE, SERVICE_VERSION, LAYER_NAME, MAIN_PATH, PYTHON_API_PORT
+from conf import DOMAIN, WORKSPACE, SERVICE_VERSION, LAYER_NAME, PYTHON_API_PORT
 from api import get_wms_data
 
-app = Flask(__name__, template_folder=MAIN_PATH.joinpath('./templates'))
+app = Flask(__name__, template_folder=Path('./templates'))
 
 WMS_URL = f"{DOMAIN}/geoserver/{WORKSPACE}/wms"
 
