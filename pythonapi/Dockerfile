@@ -50,5 +50,6 @@ RUN poetry install --only main --no-root --no-ansi
 
 # Copy project data
 COPY app app
+COPY demo_data demo_data
 
 CMD [ "poetry", "run", "python3", "./app/app.py" ]
