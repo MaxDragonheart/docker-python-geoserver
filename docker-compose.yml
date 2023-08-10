@@ -41,8 +41,27 @@ services:
     networks:
       - test
 
+  nginx:
+    image: maxdragonheart/nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx-staging
+    volumes:
+      - nginx-conf:/etc/nginx
+      - nginx-logs:/var/log/nginx
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - python-api
+    networks:
+      - test
+
 volumes:
   geoserver:
+  nginx-conf:
+  nginx-logs:
 
 networks:
   test:
