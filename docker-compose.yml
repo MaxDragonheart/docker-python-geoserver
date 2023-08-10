@@ -21,7 +21,7 @@ services:
     networks:
       - test
 
-  python-api:
+  pythonapi:
     image: maxdragonheart/${PROJECT_NAME}
     build:
       context: ./pythonapi
@@ -46,21 +46,19 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    container_name: nginx-staging
+    container_name: test-nginx
     volumes:
-      - nginx-conf:/etc/nginx
       - nginx-logs:/var/log/nginx
     ports:
       - 80:80
       - 443:443
     depends_on:
-      - python-api
+      - pythonapi
     networks:
       - test
 
 volumes:
   geoserver:
-  nginx-conf:
   nginx-logs:
 
 networks:
