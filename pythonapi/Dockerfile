@@ -9,7 +9,6 @@ ARG LAYER_NAME=NDVI_Campania_20150807
 FROM maxdragonheart/ulgis:latest as gis-os
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install python3.8-venv -y
 
 # GIS-OS as Layer
 FROM gis-os as project-dependencies
@@ -44,7 +43,7 @@ RUN python3 -m venv $POETRY_VENV \
 ENV PATH="${PATH}:${POETRY_VENV}/bin"
 
 # Copy project requirements
-COPY ./pyproject.toml ./pyproject.toml
+COPY pyproject.toml ./pyproject.toml
 
 # Project initialization
 RUN poetry install --only main --no-root --no-ansi
