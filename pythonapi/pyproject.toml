@@ -1,21 +1,19 @@
 [tool.poetry]
 name = "test-python-dockergeoserver"
-version = "0.1.0"
+version = "0.0.1"
 description = ""
-authors = ["MaxDragonheart <massimilianomoraca@gmail.com>"]
+authors = ["Massimiliano Moraca <info@massimilianomoraca.it>"]
 readme = "README.md"
 packages = [{include = "test_python_dockergeoserver"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-Flask = "^2.2.2"
-OWSLib = "^0.27.2"
-fsspec = "^2022.8.2"
-python-dotenv = "^0.21.0"
-
-
-[tool.poetry.group.dev.dependencies]
+python = "^3.10"
+flask = "^2.3.2"
+owslib = "^0.29.2"
+fsspec = "^2023.6.0"
+python-dotenv = "^1.0.0"
 jupyter = "^1.0.0"
+
 
 [build-system]
 requires = ["poetry-core"]
