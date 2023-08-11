@@ -2,17 +2,20 @@
 
 API_PORT=$ENV_PORT
 
-#echo "Make log files"
-#touch ./logs/gunicorn.log
-#touch ./logs/gunicorn-access.log
+# Move to project folder
+cd app
+echo "File and folders in "$PWD
+for entry in $PWD/*
+do
+  echo "$entry"
+done
+echo
 
 echo "Project in progress.."
-echo "Project port: $API_PORT -"
-poetry run gunicorn ./app/app.py \
+echo "Project port: $API_PORT"
+
+poetry run gunicorn 'app:start_api()' \
     --name project \
     --bind 0.0.0.0:"${API_PORT}" \
-#    --workers 3 \
-#    --log-level=debug \
-#    --error-logfile=../logs/gunicorn.log \
-#    --access-logfile=../logs/gunicorn-access.log \
+    --workers 3 \
 "$@"
